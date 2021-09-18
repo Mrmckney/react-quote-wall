@@ -4,8 +4,13 @@ import QuoteWall from "./components/QuoteWall";
 import Login from "./components/Login";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Signup from "./components/Signup";
+import { useState } from "react";
 
 function App() {
+
+  const [user, setUser] = useState(null)
+
   return (
     <Router>
         <nav>
@@ -22,7 +27,12 @@ function App() {
             </li>
             <li>
               <Link to="/login" style={{textDecoration: "none", color: "white"}}>
-                <h4>User</h4>
+                <h4>Login</h4>
+              </Link>
+            </li>
+            <li>
+              <Link to="/signup" style={{textDecoration: "none", color: "white"}}>
+                <h4>Sign Up</h4>
               </Link>
             </li>
           </ul>
@@ -32,7 +42,10 @@ function App() {
             <CreateQuote />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login setUser={setUser}/>
+          </Route>
+          <Route path="/signup">
+            <Signup setUser={setUser}/>
           </Route>
           <Route path="/">
             <QuoteWall />
