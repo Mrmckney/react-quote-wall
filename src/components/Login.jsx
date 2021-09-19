@@ -10,6 +10,7 @@ function Login({setUser}){
     const [email, setEmail] = useState(null)
 
     const handleSubmit = () => {
+        if(email !== null && password !== null){
         fetch('http://localhost:5000/login', {
             method: 'POST',
             headers: {
@@ -19,10 +20,23 @@ function Login({setUser}){
         })
         .then(response => response.json())
         .then(data => {
-            setUser(data)
-            history.push('/')
+            if(data.status === 500){
+                return alert(data.message)
+            }
+            if(data.status === 401){
+                return alert(data.message)
+            }
+            if(data.status === 200){
+                setUser(data)
+                history.push('/') 
+                return
+            }
         })
-        .catch(err => alert(err))
+        .catch(err => alert(err.message))
+    }
+    else {
+        return alert("Missing email or password")
+    }
     }
 
     return(
@@ -34,7 +48,7 @@ function Login({setUser}){
             <FloatingLabel controlId="floatingPassword" label="Password">
                 <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
             </FloatingLabel>
-            <Button style={{ marginTop: 30 }} onSubmit={handleSubmit}>Login</Button>
+            <Button style={{ marginTop: 30 }} onClick={handleSubmit}>Login</Button>
         </div>
     )
 }

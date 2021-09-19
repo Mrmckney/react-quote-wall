@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CreateQuote from "./components/CreateQuote";
 import QuoteWall from "./components/QuoteWall";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Signup from "./components/Signup";
-import { useState } from "react";
 
 function App() {
 
@@ -20,11 +20,8 @@ function App() {
                 <h1>QuoteWall</h1>
               </Link>
             </li>
-            <li>
-              <Link to="/quote" style={{textDecoration: "none", color: "white"}}>
-                <h4>Add Quote</h4>
-              </Link>
-            </li>
+            {!user &&
+            <>
             <li>
               <Link to="/login" style={{textDecoration: "none", color: "white"}}>
                 <h4>Login</h4>
@@ -35,12 +32,30 @@ function App() {
                 <h4>Sign Up</h4>
               </Link>
             </li>
-          </ul>
+            </>
+            }
+            {user &&
+            <>
+            <li>
+            <Link to="/quote" style={{textDecoration: "none", color: "white"}}>
+              <h4>Add Quote</h4>
+            </Link>
+            </li>
+            <li>
+              <Link to="/" style={{textDecoration: "none", color: "white"}}>
+              <h4 onClick={e => setUser(null)}>Logout</h4>
+              </Link>
+            </li>
+            </>
+            }
+            </ul>
         </nav>
         <Switch>
+          {user &&
           <Route path="/quote">
             <CreateQuote />
           </Route>
+          }   
           <Route path="/login">
             <Login setUser={setUser}/>
           </Route>
