@@ -9,8 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
-  const [user, setUser] = useState(null)
-
+  const [user, setUser] = useState(localStorage.getItem('user') || null)
+  
   return (
     <Router>
         <nav>
@@ -20,7 +20,8 @@ function App() {
                 <h1>QuoteWall</h1>
               </Link>
             </li>
-            {!user &&
+            {!user
+            ?
             <>
             <li>
               <Link to="/login" style={{textDecoration: "none", color: "white"}}>
@@ -33,8 +34,7 @@ function App() {
               </Link>
             </li>
             </>
-            }
-            {user &&
+           :
             <>
             <li>
             <Link to="/quote" style={{textDecoration: "none", color: "white"}}>
@@ -42,8 +42,12 @@ function App() {
             </Link>
             </li>
             <li>
-              <Link to="/" style={{textDecoration: "none", color: "white"}}>
-              <h4 onClick={e => setUser(null)}>Logout</h4>
+              <Link to="/logout" style={{textDecoration: "none", color: "white"}}>
+              <h4 onClick={e => {
+                  setUser(null)
+                  localStorage.clear()
+                  window.location.reload()
+                }}>Logout</h4>
               </Link>
             </li>
             </>
