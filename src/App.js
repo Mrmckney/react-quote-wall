@@ -25,12 +25,12 @@ function App() {
             <>
             <li>
               <Link to="/login" style={{textDecoration: "none", color: "white"}}>
-                <h4>Login</h4>
+                <h4 style={{marginTop: '15px'}} >Login</h4>
               </Link>
             </li>
             <li>
               <Link to="/signup" style={{textDecoration: "none", color: "white"}}>
-                <h4>Sign Up</h4>
+                <h4 style={{marginTop: '15px'}} >Sign Up</h4>
               </Link>
             </li>
             </>
@@ -38,7 +38,7 @@ function App() {
             <>
             <li>
             <Link to="/quote" style={{textDecoration: "none", color: "white"}}>
-              <h4>Add Quote</h4>
+              <h4 style={{marginTop: '15px'}} >Add Quote</h4>
             </Link>
             </li>
             <li>
@@ -47,7 +47,9 @@ function App() {
                   setUser(null)
                   localStorage.clear()
                   window.location.reload()
-                }}>Logout</h4>
+                }}
+                style={{marginTop: '15px'}}
+                >Logout</h4>
               </Link>
             </li>
             </>
