@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FloatingLabel, Form, Button } from 'react-bootstrap'
 
@@ -9,7 +9,13 @@ function Signup({setUser}){
     const [password, setPassword] = useState(null)
     const [email, setEmail] = useState(null)
 
+    const emailRegex = /\S+@\S+\.\S+/
+
     const handleSubmit = () => {
+        if(!emailRegex.test(email)){
+            alert('Enter a Valid Email')
+            return 
+        }
         if(email !== null && password !== null){
         fetch('http://localhost:5000/signup', {
             method: 'POST',
@@ -39,7 +45,7 @@ function Signup({setUser}){
 
     return(
         <div style={{ marginLeft: '500px', marginRight: '500px', marginTop: 100}}>
-            <h1 style={{ marginLeft: 150, marginBottom: 20}}>Sign Up</h1>
+            <h1 style={{ marginLeft: 150, marginBottom: 20 }}>Sign Up</h1>
             <Form>
                 <Form.Group>
                     <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">

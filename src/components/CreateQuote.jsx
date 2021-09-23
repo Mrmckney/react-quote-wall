@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 
@@ -33,7 +33,7 @@ function CreateQuote() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Credit</Form.Label>
-                <Form.Control type="email" maxLength="26" placeholder="Name here" onChange={e => setCredit(e.target.value)}/>
+                <Form.Control type="text" maxLength="26" placeholder="Name here" onChange={e => setCredit(e.target.value)}/>
             </Form.Group>
             <Button onClick={handleSubmit}>Submit</Button>
         </Form>
